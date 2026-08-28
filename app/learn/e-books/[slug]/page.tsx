@@ -1,10 +1,11 @@
 import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Book, ArrowLeft, Download, BookOpen, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Book, ArrowLeft, BookOpen, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { EBOOKS } from '@/lib/data';
 import StructuredData from '@/components/StructuredData';
 import { generateBookSchema } from '@/lib/seo';
+import ReadOnlineButton from '@/components/ReadOnlineButton';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -90,22 +91,8 @@ export default async function EBookDetailPage({ params }: PageProps) {
               </ul>
             </div>
 
-            {/* Actions */}
-            <div className="pt-2 flex flex-col sm:flex-row items-center gap-4">
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  alert(`Opened interactive web reader for: ${ebook.title}`);
-                }}
-                className="w-full sm:w-auto px-8 py-3.5 bg-teal-600 hover:bg-teal-500 text-white font-bold text-sm rounded-xl inline-flex items-center justify-center gap-2 shadow-md transition-all"
-              >
-                <BookOpen className="w-4 h-4" /> Read Online Now
-              </a>
-              <span className="text-xs text-slate-500 flex items-center gap-1">
-                <ShieldCheck className="w-4 h-4 text-teal-600" /> Free Open Educational Access
-              </span>
-            </div>
+            {/* Client Read Online Button */}
+            <ReadOnlineButton title={ebook.title} />
 
           </div>
 

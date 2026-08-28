@@ -652,6 +652,34 @@ export default function HomePage() {
             <p className="text-lg text-slate-300 leading-relaxed">
               Standardize learning across regional vision centers, track student clinical competencies in real time, and manage hospital faculty efficiently.
             </p>
+
+            {/* Official 6 Features List */}
+            <div className="pt-4 grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-slate-200 text-left">
+              <div className="flex items-start gap-2 bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+                <CheckCircle2 className="w-4 h-4 text-teal-400 flex-shrink-0 mt-0.5" />
+                <span><strong>Competency-based curriculum support</strong> with mapped skills and assessments</span>
+              </div>
+              <div className="flex items-start gap-2 bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+                <CheckCircle2 className="w-4 h-4 text-teal-400 flex-shrink-0 mt-0.5" />
+                <span><strong>Training and assessment resources</strong> tailored for AOPs</span>
+              </div>
+              <div className="flex items-start gap-2 bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+                <CheckCircle2 className="w-4 h-4 text-teal-400 flex-shrink-0 mt-0.5" />
+                <span><strong>Tools for planning, executing, and monitoring</strong> training programmes</span>
+              </div>
+              <div className="flex items-start gap-2 bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+                <CheckCircle2 className="w-4 h-4 text-teal-400 flex-shrink-0 mt-0.5" />
+                <span><strong>Documentation</strong> of training activities and learner progress</span>
+              </div>
+              <div className="flex items-start gap-2 bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+                <CheckCircle2 className="w-4 h-4 text-teal-400 flex-shrink-0 mt-0.5" />
+                <span><strong>Reporting and review support</strong> for tracking progress and identifying gaps</span>
+              </div>
+              <div className="flex items-start gap-2 bg-slate-900/80 p-3 rounded-xl border border-slate-800">
+                <CheckCircle2 className="w-4 h-4 text-teal-400 flex-shrink-0 mt-0.5" />
+                <span><strong>Multi-user access</strong> with role-based use for trainers and learners</span>
+              </div>
+            </div>
           </div>
 
           {/* 4 Core Pillars Grid */}

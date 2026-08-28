@@ -1,8 +1,9 @@
 import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { FileText, Download, ArrowLeft, ShieldCheck, User, Calendar, CheckCircle2 } from 'lucide-react';
+import { FileText, ArrowLeft, ShieldCheck, User, Calendar, CheckCircle2 } from 'lucide-react';
 import { RESOURCES } from '@/lib/data';
+import DownloadButton from '@/components/DownloadButton';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -54,22 +55,8 @@ export default async function ResourceDetailPage({ params }: PageProps) {
           <div><strong>Downloads:</strong> {resource.downloadCount}</div>
         </div>
 
-        {/* Download action button */}
-        <div className="pt-2 flex flex-col sm:flex-row items-center gap-4">
-          <a
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              alert(`Simulated direct download of file: ${resource.title} (${resource.format})`);
-            }}
-            className="w-full sm:w-auto px-8 py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm rounded-xl inline-flex items-center justify-center gap-2 shadow-md transition-all"
-          >
-            <Download className="w-4 h-4" /> Download File ({resource.format})
-          </a>
-          <span className="text-xs text-slate-500 flex items-center gap-1">
-            <ShieldCheck className="w-4 h-4 text-emerald-600" /> Free Open Educational Resource
-          </span>
-        </div>
+        {/* Client Download Button Component */}
+        <DownloadButton title={resource.title} format={resource.format} />
       </div>
 
     </div>

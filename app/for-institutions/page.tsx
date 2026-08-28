@@ -4,7 +4,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { 
   Building2, Users, BookOpen, ShieldCheck, ArrowRight, CheckCircle2, 
-  BarChart3, Sparkles, UserCheck, Layers, ClipboardCheck, ArrowUpRight 
+  BarChart3, Sparkles, UserCheck, Layers, ClipboardCheck, ArrowUpRight,
+  Target, CalendarCheck, FileSpreadsheet, KeyRound, Check
 } from 'lucide-react';
 import DemoRequestModal from '@/components/DemoRequestModal';
 
@@ -14,6 +15,45 @@ export default function ForInstitutionsPage() {
 
   const estimatedSavedHours = Math.round(studentCount * 3.5);
   const estimatedCertificationSpeedup = '40%';
+
+  const lmsFeatures = [
+    {
+      title: 'Competency-Based Curriculum Support',
+      desc: 'Mapped skills and clinical assessments aligned with international eye-care standards.',
+      icon: Target,
+      color: 'bg-teal-50 text-teal-600 border-teal-200'
+    },
+    {
+      title: 'Tailored Resources for AOPs',
+      desc: 'Training and assessment resources specifically designed for Allied Ophthalmic Personnel.',
+      icon: UserCheck,
+      color: 'bg-cyan-50 text-cyan-600 border-cyan-200'
+    },
+    {
+      title: 'Programme Execution & Monitoring',
+      desc: 'Comprehensive tools for planning, executing, and monitoring institutional training programmes.',
+      icon: CalendarCheck,
+      color: 'bg-purple-50 text-purple-600 border-purple-200'
+    },
+    {
+      title: 'Training & Learner Documentation',
+      desc: 'Complete documentation of clinical training activities, logbooks, and learner skill progress.',
+      icon: FileSpreadsheet,
+      color: 'bg-indigo-50 text-indigo-600 border-indigo-200'
+    },
+    {
+      title: 'Reporting & Review Analytics',
+      desc: 'Reporting and review support for tracking cohort progress and identifying knowledge gaps.',
+      icon: BarChart3,
+      color: 'bg-sky-50 text-sky-600 border-sky-200'
+    },
+    {
+      title: 'Multi-User Role-Based Access',
+      desc: 'Granular multi-user access control with role-based permissions for trainers, supervisors, and learners.',
+      icon: KeyRound,
+      color: 'bg-emerald-50 text-emerald-600 border-emerald-200'
+    }
+  ];
 
   return (
     <div className="py-12 space-y-16 lg:space-y-24">
@@ -39,7 +79,7 @@ export default function ForInstitutionsPage() {
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
             <button
               onClick={() => setIsDemoModalOpen(true)}
-              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-slate-950 font-bold text-base shadow-lg shadow-teal-500/20 transition-all flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-slate-950 font-bold text-base shadow-lg shadow-teal-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
             >
               Request a Personalized Demo <ArrowRight className="w-5 h-5" />
             </button>
@@ -54,10 +94,54 @@ export default function ForInstitutionsPage() {
         </div>
       </div>
 
-      {/* 4 Core Pillars */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+      {/* CORE LMS FEATURES SECTION */}
+      <section id="features" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <span className="text-xs font-bold uppercase tracking-wider text-teal-600">Complete Institutional Capabilities</span>
+          <span className="text-xs font-bold uppercase tracking-wider text-teal-600 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
+            Aurosiksha LMS Feature Suite
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            Key Features of Aurosiksha LMS
+          </h2>
+          <p className="text-slate-600 text-base leading-relaxed">
+            Designed specifically for eye hospitals, optometry schools, and allied ophthalmic training centers.
+          </p>
+        </div>
+
+        {/* 6 Official Feature Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {lmsFeatures.map((feat, idx) => {
+            const Icon = feat.icon;
+            return (
+              <div 
+                key={idx} 
+                className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-lg transition-all space-y-4 flex flex-col justify-between group"
+              >
+                <div className="space-y-3">
+                  <div className={`w-12 h-12 rounded-xl border flex items-center justify-center ${feat.color} group-hover:scale-110 transition-transform`}>
+                    <Icon className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-lg font-bold text-slate-900 group-hover:text-teal-600 transition-colors">
+                    {feat.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed font-medium">
+                    {feat.desc}
+                  </p>
+                </div>
+                <div className="pt-3 border-t border-slate-100 flex items-center gap-1.5 text-xs font-semibold text-teal-700">
+                  <Check className="w-4 h-4 text-teal-600" />
+                  <span>Integrated Feature</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* 4 Core Pillars */}
+      <section id="workflow" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <span className="text-xs font-bold uppercase tracking-wider text-teal-600">Institutional Operational Workflow</span>
           <h2 className="text-3xl font-extrabold text-slate-900">Manage, Teach, Assess, and Track</h2>
         </div>
 
@@ -146,7 +230,7 @@ export default function ForInstitutionsPage() {
                 step="10"
                 value={studentCount}
                 onChange={e => setStudentCount(Number(e.target.value))}
-                className="w-full accent-teal-500"
+                className="w-full accent-teal-500 cursor-pointer"
               />
               <p className="text-xs text-slate-400">
                 Adjust slider to match your current annual ophthalmic student intake across vision centers.
@@ -168,7 +252,7 @@ export default function ForInstitutionsPage() {
       </section>
 
       {/* CTA Box */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="request-demo" className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-gradient-to-r from-teal-900 to-slate-900 text-white rounded-3xl p-8 sm:p-12 text-center space-y-6 shadow-2xl border border-teal-800">
           <h2 className="text-3xl font-extrabold">Ready to Transform Your Eye-Care Training Program?</h2>
           <p className="text-sm text-slate-300 max-w-xl mx-auto">
@@ -177,7 +261,7 @@ export default function ForInstitutionsPage() {
           <div className="pt-2">
             <button
               onClick={() => setIsDemoModalOpen(true)}
-              className="px-8 py-4 bg-teal-400 hover:bg-teal-300 text-slate-950 font-bold rounded-xl text-base shadow-lg transition-all"
+              className="px-8 py-4 bg-teal-400 hover:bg-teal-300 text-slate-950 font-bold rounded-xl text-base shadow-lg transition-all cursor-pointer"
             >
               Request Institutional Demo
             </button>

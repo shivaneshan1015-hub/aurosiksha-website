@@ -199,7 +199,23 @@ export const COURSES: Course[] = [
     prerequisites: ['Ocular anatomy and physiology'],
     relatedBiteIds: ['bite-3'],
     relatedWebinarIds: ['webinar-1'],
-    relatedResourceIds: ['res-1']
+    relatedResourceIds: ['res-1'],
+    modules: [
+      {
+        id: 'mod-3-1',
+        title: 'Module 1: Slit Lamp Optics & Illumination Techniques',
+        description: 'Focal, retro-illumination, and Van Herick optical sectioning.',
+        lessons: [
+          {
+            id: 'les-3-1-1',
+            title: '1.1 Illumination Geometry & Slit Width Adjustments',
+            duration: '18 mins',
+            type: 'video',
+            content: 'Mastering diffuse vs focal illumination angle setup on slit lamp biomicroscope.'
+          }
+        ]
+      }
+    ]
   }
 ];
 
