@@ -39,7 +39,7 @@ export default function WebinarRegisterModal({ webinar, isOpen, onClose }: Webin
 
           <button
             onClick={handleClose}
-            className="absolute top-4 right-4 p-2 text-slate-400 hover:text-white rounded-full bg-slate-800/80 hover:bg-slate-700 transition-colors z-10"
+            className="absolute top-4 right-4 p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center text-slate-400 hover:text-white rounded-full bg-slate-800/80 hover:bg-slate-700 transition-colors z-10"
             aria-label="Close webinar modal"
           >
             <X className="w-5 h-5" />
@@ -98,13 +98,13 @@ export default function WebinarRegisterModal({ webinar, isOpen, onClose }: Webin
                 onClick={() => {
                   alert('Calendar invite (.ics) simulated download.');
                 }}
-                className="px-5 py-2.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold inline-flex items-center justify-center gap-2 shadow-md transition-all"
+                className="px-5 py-3 sm:py-2.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold inline-flex items-center justify-center gap-2 shadow-md transition-all min-h-[44px]"
               >
                 <Download className="w-4 h-4" /> Add to Calendar (.ics)
               </button>
               <button
                 onClick={handleClose}
-                className="px-5 py-2.5 border border-slate-300 text-slate-700 hover:bg-slate-100 rounded-xl text-xs font-semibold transition-all"
+                className="px-5 py-3 sm:py-2.5 border border-slate-300 text-slate-700 hover:bg-slate-100 rounded-xl text-xs font-semibold transition-all min-h-[44px]"
               >
                 Done
               </button>
@@ -148,14 +148,14 @@ export default function WebinarRegisterModal({ webinar, isOpen, onClose }: Webin
                 <div>
                   <label className="block text-xs font-bold uppercase text-slate-700 mb-1">Full Name *</label>
                   <div className="relative">
-                    <User className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                    <User className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
                     <input
                       type="text"
                       required
                       value={attendee.name}
                       onChange={e => setAttendee({ ...attendee, name: e.target.value })}
                       placeholder="e.g. Dr. Ananya Sen"
-                      className="w-full pl-9 pr-3 py-2 text-xs border border-slate-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 bg-white"
+                      className="w-full pl-9 pr-3 py-2.5 text-sm sm:text-xs border border-slate-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 bg-white min-h-[44px]"
                     />
                   </div>
                 </div>
@@ -163,14 +163,14 @@ export default function WebinarRegisterModal({ webinar, isOpen, onClose }: Webin
                 <div>
                   <label className="block text-xs font-bold uppercase text-slate-700 mb-1">Email Address *</label>
                   <div className="relative">
-                    <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                    <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
                     <input
                       type="email"
                       required
                       value={attendee.email}
                       onChange={e => setAttendee({ ...attendee, email: e.target.value })}
                       placeholder="ananya@eyecare.org"
-                      className="w-full pl-9 pr-3 py-2 text-xs border border-slate-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 bg-white"
+                      className="w-full pl-9 pr-3 py-2.5 text-sm sm:text-xs border border-slate-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 bg-white min-h-[44px]"
                     />
                   </div>
                 </div>
@@ -181,7 +181,7 @@ export default function WebinarRegisterModal({ webinar, isOpen, onClose }: Webin
                 <select
                   value={attendee.role}
                   onChange={e => setAttendee({ ...attendee, role: e.target.value })}
-                  className="w-full px-3 py-2 text-xs border border-slate-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 bg-white"
+                  className="w-full px-3 py-2.5 text-sm sm:text-xs border border-slate-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-teal-500 bg-white min-h-[44px]"
                 >
                   <option value="Optometrist">Optometrist</option>
                   <option value="Refractionist">Refractionist</option>
@@ -201,13 +201,13 @@ export default function WebinarRegisterModal({ webinar, isOpen, onClose }: Webin
                   <button
                     type="button"
                     onClick={handleClose}
-                    className="px-4 py-2.5 border border-slate-300 text-slate-600 hover:bg-slate-100 rounded-xl text-xs font-semibold w-1/2 sm:w-auto transition-colors"
+                    className="px-4 py-3 sm:py-2.5 border border-slate-300 text-slate-600 hover:bg-slate-100 rounded-xl text-xs font-semibold w-1/2 sm:w-auto transition-colors min-h-[44px]"
                   >
                     Maybe Later
                   </button>
                   <button
                     type="submit"
-                    className="px-6 py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-slate-950 font-bold text-xs rounded-xl shadow-md hover:shadow-teal-500/20 transition-all w-1/2 sm:w-auto text-center"
+                    className="px-6 py-3 sm:py-2.5 bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-slate-950 font-bold text-xs rounded-xl shadow-md hover:shadow-teal-500/20 transition-all w-1/2 sm:w-auto text-center min-h-[44px]"
                   >
                     Register Free Spot →
                   </button>
