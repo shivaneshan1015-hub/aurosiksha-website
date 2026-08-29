@@ -5,13 +5,14 @@ import Link from 'next/link';
 import { 
   Building2, Users, BookOpen, ShieldCheck, ArrowRight, CheckCircle2, 
   BarChart3, Sparkles, UserCheck, Layers, ClipboardCheck, ArrowUpRight,
-  Target, CalendarCheck, FileSpreadsheet, KeyRound, Check
+  Target, CalendarCheck, FileSpreadsheet, KeyRound, Check, X, Award, Eye
 } from 'lucide-react';
 import DemoRequestModal from '@/components/DemoRequestModal';
 
 export default function ForInstitutionsPage() {
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
   const [studentCount, setStudentCount] = useState(120);
+  const [activeTeaserTab, setActiveTeaserTab] = useState<'roster' | 'osce' | 'audit'>('roster');
 
   const estimatedSavedHours = Math.round(studentCount * 3.5);
   const estimatedCertificationSpeedup = '40%';
@@ -59,15 +60,19 @@ export default function ForInstitutionsPage() {
     <div className="py-12 space-y-16 lg:space-y-24">
       
       {/* Header / Hero */}
-      <div className="bg-slate-900 text-white py-16 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 text-center lg:text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/20 text-teal-300 border border-teal-500/30 text-xs font-semibold">
+      <div className="bg-slate-900 text-white py-16 border-b border-slate-800 relative overflow-hidden">
+        
+        {/* Glow */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6 text-center lg:text-left">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-500/20 text-teal-300 border border-teal-500/30 text-xs font-bold uppercase tracking-wider">
             <Building2 className="w-4 h-4 text-teal-400" /> B2B Institutional LMS Solution
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
             An LMS Built Specifically for <br className="hidden sm:inline" />
-            <span className="bg-gradient-to-r from-teal-300 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-teal-300 via-cyan-300 to-sky-400 bg-clip-text text-transparent">
               Eye-Care Training Institutions
             </span>
           </h1>
@@ -138,11 +143,119 @@ export default function ForInstitutionsPage() {
         </div>
       </section>
 
+      {/* LIVE INTERACTIVE ADMIN PORTAL TEASER */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-slate-900 rounded-3xl p-6 sm:p-10 border border-slate-800 shadow-2xl text-white space-y-8">
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-800 pb-6">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-teal-400 bg-teal-950 px-3 py-1 rounded-full border border-teal-800">
+                Interactive Admin Teaser
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white mt-2">
+                Hospital Administrative Command Center
+              </h2>
+            </div>
+            <Link 
+              href="/institution-dashboard" 
+              className="text-xs font-bold text-teal-400 hover:underline flex items-center gap-1"
+            >
+              Open Full Interactive Admin Dashboard →
+            </Link>
+          </div>
+
+          {/* Teaser Tabs */}
+          <div className="flex gap-2 border-b border-slate-800 pb-2 text-xs font-semibold">
+            {[
+              { id: 'roster', label: 'Trainees Roster' },
+              { id: 'osce', label: 'OSCE Skill Clearance' },
+              { id: 'audit', label: 'Accreditation Audit Logs' },
+            ].map(tab => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTeaserTab(tab.id as any)}
+                className={`px-4 py-2 rounded-xl transition-all ${
+                  activeTeaserTab === tab.id
+                    ? 'bg-teal-500 text-slate-950 font-bold'
+                    : 'bg-slate-800 text-slate-300 hover:text-white'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Tab Content Teaser */}
+          {activeTeaserTab === 'roster' && (
+            <div className="bg-slate-950 rounded-2xl p-4 border border-slate-800 overflow-x-auto text-xs space-y-3">
+              <div className="flex items-center justify-between text-slate-400 font-semibold text-[11px] pb-2 border-b border-slate-800">
+                <span>Student Name</span>
+                <span>Specialty Role</span>
+                <span>Branch</span>
+                <span>Course Progress</span>
+                <span>OSCE Status</span>
+              </div>
+              {[
+                { name: 'Rahul Sharma', role: 'Refractionist', branch: 'Madurai Unit', progress: '78%', status: 'Cleared' },
+                { name: 'Priya Sundaram', role: 'Optometrist', branch: 'Chennai Main', progress: '92%', status: 'Cleared' },
+                { name: 'Karthik Raja', role: 'OT Assistant', branch: 'Coimbatore Branch', progress: '65%', status: 'Pending Drill' },
+              ].map((st, i) => (
+                <div key={i} className="flex items-center justify-between py-2 border-b border-slate-900 text-slate-200">
+                  <span className="font-bold text-white">{st.name}</span>
+                  <span className="text-teal-300">{st.role}</span>
+                  <span className="text-slate-400">{st.branch}</span>
+                  <span className="text-emerald-400 font-mono">{st.progress}</span>
+                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${st.status === 'Cleared' ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' : 'bg-amber-950 text-amber-300 border border-amber-800'}`}>{st.status}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {activeTeaserTab === 'osce' && (
+            <div className="bg-slate-950 rounded-2xl p-6 border border-slate-800 text-xs space-y-3">
+              <h4 className="text-sm font-bold text-teal-400">Direct Observation OSCE Practical Rubric</h4>
+              <p className="text-slate-300">Live clinical evaluation rubric scored in clinic/OT by hospital senior faculty:</p>
+              <div className="space-y-2 pt-2">
+                <div className="flex items-center justify-between p-2.5 rounded bg-slate-900 border border-slate-800">
+                  <span>1. Retinoscope streak neutralization speed & accuracy (±0.25D)</span>
+                  <span className="text-emerald-400 font-bold">Passed (95%)</span>
+                </div>
+                <div className="flex items-center justify-between p-2.5 rounded bg-slate-900 border border-slate-800">
+                  <span>2. Slit Lamp Van Herick angle depth sectioning</span>
+                  <span className="text-emerald-400 font-bold">Passed (90%)</span>
+                </div>
+                <div className="flex items-center justify-between p-2.5 rounded bg-slate-900 border border-slate-800">
+                  <span>3. Sterile OT gowning & intracameral antibiotic prep</span>
+                  <span className="text-emerald-400 font-bold">Passed (100%)</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTeaserTab === 'audit' && (
+            <div className="bg-slate-950 rounded-2xl p-6 border border-slate-800 text-xs space-y-3">
+              <h4 className="text-sm font-bold text-sky-400">Verifiable Accreditation Report Card</h4>
+              <p className="text-slate-300">Automated audit logs for hospital accreditation boards & state health councils.</p>
+              <div className="p-3 bg-slate-900 rounded-xl border border-slate-800 flex items-center justify-between">
+                <div>
+                  <p className="font-bold text-white">Batch 2026-A Compliance Report.pdf</p>
+                  <p className="text-[11px] text-slate-400">Generated Aug 29, 2026 • 142 Trainees Verified</p>
+                </div>
+                <button onClick={() => alert('Audit report PDF downloaded.')} className="px-3 py-1.5 bg-teal-500 text-slate-950 font-bold text-xs rounded-lg">
+                  Download Audit PDF
+                </button>
+              </div>
+            </div>
+          )}
+
+        </div>
+      </section>
+
       {/* 4 Core Pillars */}
       <section id="workflow" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="text-center max-w-3xl mx-auto space-y-3">
           <span className="text-xs font-bold uppercase tracking-wider text-teal-600">Institutional Operational Workflow</span>
-          <h2 className="text-3xl font-extrabold text-slate-900">Manage, Teach, Assess, and Track</h2>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">Manage, Teach, Assess, and Track</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -207,6 +320,55 @@ export default function ForInstitutionsPage() {
             </ul>
           </div>
 
+        </div>
+      </section>
+
+      {/* FEATURE COMPARISON MATRIX (INDIVIDUAL VS INSTITUTIONAL) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <span className="text-xs font-bold uppercase tracking-wider text-teal-600 bg-teal-50 px-3 py-1 rounded-full border border-teal-200">
+            Enterprise Plan Comparison
+          </span>
+          <h2 className="text-3xl font-extrabold text-slate-900">Individual Learner vs Institutional Enterprise LMS</h2>
+        </div>
+
+        <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-sm">
+          <table className="w-full text-left text-xs sm:text-sm">
+            <thead className="bg-slate-900 text-white font-bold">
+              <tr>
+                <th className="p-4 sm:p-5">Feature Capability</th>
+                <th className="p-4 sm:p-5 text-center text-teal-300">Individual Learner (Free)</th>
+                <th className="p-4 sm:p-5 text-center text-cyan-300 bg-slate-800">Institutional LMS (Enterprise)</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-100 text-slate-700">
+              <tr>
+                <td className="p-4 font-semibold text-slate-900">Access to Siksha Bites & Webinars</td>
+                <td className="p-4 text-center text-emerald-600 font-bold">✓ Included</td>
+                <td className="p-4 text-center text-emerald-600 font-bold bg-slate-50/50">✓ Included</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-semibold text-slate-900">Multi-Student Batch Enrollment Controls</td>
+                <td className="p-4 text-center text-slate-400">✕ Individual Only</td>
+                <td className="p-4 text-center text-emerald-600 font-bold bg-slate-50/50">✓ Multi-Batch Admin Controls</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-semibold text-slate-900">Direct Observation OSCE Practical Rubrics</td>
+                <td className="p-4 text-center text-slate-400">✕ Self-Evaluation</td>
+                <td className="p-4 text-center text-emerald-600 font-bold bg-slate-50/50">✓ Live Senior Faculty Grading</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-semibold text-slate-900">Hospital Accreditation Audit Reports</td>
+                <td className="p-4 text-center text-slate-400">✕ Personal Certs Only</td>
+                <td className="p-4 text-center text-emerald-600 font-bold bg-slate-50/50">✓ Export PDF Compliance Audits</td>
+              </tr>
+              <tr>
+                <td className="p-4 font-semibold text-slate-900">Multi-Branch Vision Center Management</td>
+                <td className="p-4 text-center text-slate-400">✕ Single Account</td>
+                <td className="p-4 text-center text-emerald-600 font-bold bg-slate-50/50">✓ Multi-Location Roles</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </section>
 
