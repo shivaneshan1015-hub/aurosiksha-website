@@ -13,6 +13,7 @@ interface SearchModalProps {
 
 export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const [query, setQuery] = useState('');
+  const [activeCategory, setActiveCategory] = useState<string>('all');
   const [results, setResults] = useState<SearchResultItem[]>([]);
 
   useEffect(() => {
@@ -39,86 +40,98 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     const q = query.toLowerCase();
     const items: SearchResultItem[] = [];
 
-    COURSES.forEach(c => {
-      if (c.title.toLowerCase().includes(q) || c.shortDescription.toLowerCase().includes(q) || c.topics.some(t => t.toLowerCase().includes(q))) {
-        items.push({
-          id: c.id,
-          type: 'course',
-          title: c.title,
-          subtitle: `${c.level} • ${c.duration} • ${c.instructor.name}`,
-          url: `/learn/courses/${c.slug}`,
-          badge: 'Course'
-        });
-      }
-    });
+    if (activeCategory === 'all' || activeCategory === 'course') {
+      COURSES.forEach(c => {
+        if (c.title.toLowerCase().includes(q) || c.shortDescription.toLowerCase().includes(q) || c.topics.some(t => t.toLowerCase().includes(q))) {
+          items.push({
+            id: c.id,
+            type: 'course',
+            title: c.title,
+            subtitle: `${c.level} • ${c.duration} • ${c.instructor.name}`,
+            url: `/learn/courses/${c.slug}`,
+            badge: 'Course'
+          });
+        }
+      });
+    }
 
-    WEBINARS.forEach(w => {
-      if (w.title.toLowerCase().includes(q) || w.description.toLowerCase().includes(q) || w.speaker.name.toLowerCase().includes(q)) {
-        items.push({
-          id: w.id,
-          type: 'webinar',
-          title: w.title,
-          subtitle: `${w.date} • ${w.speaker.name}`,
-          url: `/learn/webinars/${w.slug}`,
-          badge: 'Webinar'
-        });
-      }
-    });
+    if (activeCategory === 'all' || activeCategory === 'webinar') {
+      WEBINARS.forEach(w => {
+        if (w.title.toLowerCase().includes(q) || w.description.toLowerCase().includes(q) || w.speaker.name.toLowerCase().includes(q)) {
+          items.push({
+            id: w.id,
+            type: 'webinar',
+            title: w.title,
+            subtitle: `${w.date} • ${w.speaker.name}`,
+            url: `/learn/webinars/${w.slug}`,
+            badge: 'Webinar'
+          });
+        }
+      });
+    }
 
-    SIKSHA_BITES.forEach(b => {
-      if (b.title.toLowerCase().includes(q) || b.summary.toLowerCase().includes(q) || b.role.toLowerCase().includes(q)) {
-        items.push({
-          id: b.id,
-          type: 'siksha-bite',
-          title: b.title,
-          subtitle: `${b.role} • ${b.duration} • ${b.difficulty}`,
-          url: `/learn/siksha-bites/${b.slug}`,
-          badge: 'Siksha Bite'
-        });
-      }
-    });
+    if (activeCategory === 'all' || activeCategory === 'siksha-bite') {
+      SIKSHA_BITES.forEach(b => {
+        if (b.title.toLowerCase().includes(q) || b.summary.toLowerCase().includes(q) || b.role.toLowerCase().includes(q)) {
+          items.push({
+            id: b.id,
+            type: 'siksha-bite',
+            title: b.title,
+            subtitle: `${b.role} • ${b.duration} • ${b.difficulty}`,
+            url: `/learn/siksha-bites/${b.slug}`,
+            badge: 'Siksha Bite'
+          });
+        }
+      });
+    }
 
-    AOP_ROLES.forEach(r => {
-      if (r.title.toLowerCase().includes(q) || r.overview.toLowerCase().includes(q) || r.tagline.toLowerCase().includes(q)) {
-        items.push({
-          id: r.id,
-          type: 'role',
-          title: `${r.title} AOP Competency Hub`,
-          subtitle: r.tagline,
-          url: `/learn/aop/${r.slug}`,
-          badge: 'AOP Role'
-        });
-      }
-    });
+    if (activeCategory === 'all' || activeCategory === 'role') {
+      AOP_ROLES.forEach(r => {
+        if (r.title.toLowerCase().includes(q) || r.overview.toLowerCase().includes(q) || r.tagline.toLowerCase().includes(q)) {
+          items.push({
+            id: r.id,
+            type: 'role',
+            title: `${r.title} AOP Competency Hub`,
+            subtitle: r.tagline,
+            url: `/learn/aop/${r.slug}`,
+            badge: 'AOP Role'
+          });
+        }
+      });
+    }
 
-    RESOURCES.forEach(res => {
-      if (res.title.toLowerCase().includes(q) || res.description.toLowerCase().includes(q) || res.topic.toLowerCase().includes(q)) {
-        items.push({
-          id: res.id,
-          type: 'resource',
-          title: res.title,
-          subtitle: `${res.type} • ${res.format} • ${res.fileSize}`,
-          url: `/learn/resources/${res.slug}`,
-          badge: 'Resource'
-        });
-      }
-    });
+    if (activeCategory === 'all' || activeCategory === 'resource') {
+      RESOURCES.forEach(res => {
+        if (res.title.toLowerCase().includes(q) || res.description.toLowerCase().includes(q) || res.topic.toLowerCase().includes(q)) {
+          items.push({
+            id: res.id,
+            type: 'resource',
+            title: res.title,
+            subtitle: `${res.type} • ${res.format} • ${res.fileSize}`,
+            url: `/learn/resources/${res.slug}`,
+            badge: 'Resource'
+          });
+        }
+      });
+    }
 
-    EBOOKS.forEach(eb => {
-      if (eb.title.toLowerCase().includes(q) || eb.description.toLowerCase().includes(q)) {
-        items.push({
-          id: eb.id,
-          type: 'e-book',
-          title: eb.title,
-          subtitle: `${eb.subtitle} • ${eb.pagesCount} Pages`,
-          url: `/learn/e-books/${eb.slug}`,
-          badge: 'E-Book'
-        });
-      }
-    });
+    if (activeCategory === 'all' || activeCategory === 'e-book') {
+      EBOOKS.forEach(eb => {
+        if (eb.title.toLowerCase().includes(q) || eb.description.toLowerCase().includes(q)) {
+          items.push({
+            id: eb.id,
+            type: 'e-book',
+            title: eb.title,
+            subtitle: `${eb.subtitle} • ${eb.pagesCount} Pages`,
+            url: `/learn/e-books/${eb.slug}`,
+            badge: 'E-Book'
+          });
+        }
+      });
+    }
 
     setResults(items);
-  }, [query]);
+  }, [query, activeCategory]);
 
   if (!isOpen) return null;
 
@@ -160,6 +173,31 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
           >
             ESC
           </button>
+        </div>
+
+        {/* Smart Category Filter Pills */}
+        <div className="flex items-center gap-1.5 px-4 py-2 bg-slate-100/70 border-b border-slate-200/60 overflow-x-auto text-xs font-semibold">
+          {[
+            { id: 'all', label: 'All Results' },
+            { id: 'course', label: 'Courses' },
+            { id: 'webinar', label: 'Webinars' },
+            { id: 'siksha-bite', label: 'Siksha Bites' },
+            { id: 'resource', label: 'Resources' },
+            { id: 'role', label: 'AOP Roles' },
+            { id: 'e-book', label: 'E-Books' },
+          ].map(cat => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              className={`px-3 py-1 rounded-full whitespace-nowrap transition-colors ${
+                activeCategory === cat.id
+                  ? 'bg-teal-600 text-white shadow-xs'
+                  : 'bg-white text-slate-600 hover:bg-slate-200/80 border border-slate-200/80'
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
         </div>
 
         {/* Search Results Area */}

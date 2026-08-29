@@ -8,6 +8,8 @@ import {
 } from 'lucide-react';
 import { COURSES, WEBINARS } from '@/lib/data';
 
+import GamifiedBadgesShowcase from '@/components/GamifiedBadgesShowcase';
+
 export default function LearnerDashboardPage() {
   const activeCourse = COURSES[0];
   const upcomingWebinar = WEBINARS[0];
@@ -106,6 +108,8 @@ export default function LearnerDashboardPage() {
             </div>
           </div>
 
+          {/* Gamified Competency Badges Section */}
+          <GamifiedBadgesShowcase />
         </div>
 
         {/* Right Col: Webinars & Reminders */}
