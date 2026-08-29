@@ -27,6 +27,42 @@ export default function WebinarRegisterModal({ webinar, isOpen, onClose }: Webin
     onClose();
   };
 
+  const handleGoogleCalendar = () => {
+    if (!webinar) return;
+    const title = encodeURIComponent(webinar.title);
+    const details = encodeURIComponent(`Aurosiksha Masterclass: ${webinar.description}\n\nSpeaker: ${webinar.speaker.name} (${webinar.speaker.institution})\n\nAccess Link: https://aurosiksha.org/learn/webinars/${webinar.slug}`);
+    const location = encodeURIComponent('Aurosiksha Live Virtual Room');
+    const googleCalendarUrl = `https://calendar.google.com/render?action=TEMPLATE&text=${title}&dates=20260918T130000Z/20260918T143000Z&details=${details}&location=${location}`;
+    window.open(googleCalendarUrl, '_blank');
+  };
+
+  const handleIcsDownload = () => {
+    if (!webinar) return;
+    const icsContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Aurosiksha//Eye Care Webinars//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+SUMMARY:${webinar.title}
+DESCRIPTION:${webinar.description} \\nSpeaker: ${webinar.speaker.name} (${webinar.speaker.institution})
+LOCATION:Aurosiksha Live Virtual Room
+DTSTART:20260918T130000Z
+DTEND:20260918T143000Z
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR`;
+
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `${webinar.slug}.ics`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 backdrop-blur-md p-4 overflow-y-auto animate-in fade-in duration-200">
       <div className="bg-white rounded-3xl shadow-2xl border border-slate-200 w-full max-w-xl overflow-hidden animate-in zoom-in-95 duration-200 relative">
@@ -95,18 +131,16 @@ export default function WebinarRegisterModal({ webinar, isOpen, onClose }: Webin
 
             <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center">
               <button
-                onClick={() => {
-                  alert('Calendar invite (.ics) simulated download.');
-                }}
+                onClick={handleGoogleCalendar}
                 className="px-5 py-3 sm:py-2.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold inline-flex items-center justify-center gap-2 shadow-md transition-all min-h-[44px]"
               >
-                <Download className="w-4 h-4" /> Add to Calendar (.ics)
+                <Calendar className="w-4 h-4" /> Add to Google Calendar
               </button>
               <button
-                onClick={handleClose}
-                className="px-5 py-3 sm:py-2.5 border border-slate-300 text-slate-700 hover:bg-slate-100 rounded-xl text-xs font-semibold transition-all min-h-[44px]"
+                onClick={handleIcsDownload}
+                className="px-5 py-3 sm:py-2.5 border border-slate-300 text-slate-700 hover:bg-slate-100 rounded-xl text-xs font-semibold inline-flex items-center justify-center gap-2 transition-all min-h-[44px]"
               >
-                Done
+                <Download className="w-4 h-4" /> Download .ics File
               </button>
             </div>
           </div>
