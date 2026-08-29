@@ -18,11 +18,15 @@ export default function HomePage() {
   const [selectedWebinarForRegister, setSelectedWebinarForRegister] = useState<typeof WEBINARS[0] | null>(null);
 
   useEffect(() => {
-    // Auto popup webinar modal when visitor enters home page
-    const timer = setTimeout(() => {
-      setSelectedWebinarForRegister(WEBINARS[0]);
-    }, 500);
-    return () => clearTimeout(timer);
+    // Only popup webinar modal on the first visit of the session
+    const hasSeenPopup = typeof window !== 'undefined' ? sessionStorage.getItem('aurosiksha_webinar_popup_seen') : null;
+    if (!hasSeenPopup) {
+      const timer = setTimeout(() => {
+        setSelectedWebinarForRegister(WEBINARS[0]);
+        sessionStorage.setItem('aurosiksha_webinar_popup_seen', 'true');
+      }, 600);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   const featuredCourses = COURSES.slice(0, 2);

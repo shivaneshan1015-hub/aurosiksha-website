@@ -22,6 +22,9 @@ export default function WebinarRegisterModal({ webinar, isOpen, onClose }: Webin
   };
 
   const handleClose = () => {
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('aurosiksha_webinar_popup_seen', 'true');
+    }
     setRegistered(false);
     setAttendee({ name: '', email: '', role: 'Optometrist' });
     onClose();
