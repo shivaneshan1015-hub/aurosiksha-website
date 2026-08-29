@@ -29,15 +29,6 @@ export default function Navbar() {
   return (
     <>
       <header className="sticky top-0 z-40 bg-slate-900/95 backdrop-blur-md text-white border-b border-slate-800">
-        {/* Top Notification Banner */}
-        <div className="bg-gradient-to-r from-teal-900 via-slate-900 to-sky-950 px-4 py-1.5 text-center text-xs font-medium text-slate-200 border-b border-slate-800/80 flex items-center justify-center gap-2">
-          <Sparkles className="w-3.5 h-3.5 text-teal-400 animate-pulse" />
-          <span>New Webinar: <strong>Pediatric Refraction & Amblyopia Management 2026</strong></span>
-          <Link href="/learn/webinars/pediatric-refraction-and-amblyopia-management-2026" className="text-teal-300 underline font-semibold hover:text-teal-200">
-            Register Free →
-          </Link>
-        </div>
-
         {/* Primary Nav */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           

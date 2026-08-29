@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
@@ -16,6 +16,14 @@ export default function HomePage() {
   const [selectedIntent, setSelectedIntent] = useState<'quick' | 'webinar' | 'course' | 'aop' | 'resources' | 'ebooks'>('quick');
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
   const [selectedWebinarForRegister, setSelectedWebinarForRegister] = useState<typeof WEBINARS[0] | null>(null);
+
+  useEffect(() => {
+    // Auto popup webinar modal when visitor enters home page
+    const timer = setTimeout(() => {
+      setSelectedWebinarForRegister(WEBINARS[0]);
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const featuredCourses = COURSES.slice(0, 2);
   const upcomingWebinar = WEBINARS[0];
